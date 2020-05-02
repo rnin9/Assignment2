@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <time.h>
+#include <stdlib.h>
 
 struct stat stat1, stat2;
 struct tm *time1, *time2;
@@ -29,22 +30,50 @@ int main(){
 
 //파일 1의 정보를 가져오는 함수 작성
 void filestat1(){
-    
+    int check = stat("text1",&stat1);
+    if(check !=0){
+        printf("File1 stat Error!\n");
+        exit(0);
+    } 
+    else {
+        return;
+    }
 }
 
 //파일 2의 정보를 가져오는 함수 작성
 void filestat2(){
-    
+   int check = stat("text2",&stat2);
+   if(check !=0){
+         printf("File2 stat Error!\n");
+         exit(0);
+   } 
+   else{
+         return;
+   }
 }
 
 //파일 1의 시간 정보를 가져오는 함수 작성
 void filetime1(){
-    
+    time1 = localtime(&stat1.st_mtime);
+    if(time1 == NULL){
+        printf("Get File1 Time Error!\n");
+        exit(0);
+    } 
+    else{
+        return;
+    }
 }
 
 //파일 2의 시간 정보를 가져오는 함수 작성
 void filetime2(){
-    
+    time2 = localtime(&stat2.st_mtime);
+    if(time2 == NULL){
+        printf("Get File2 Time Error!\n");
+        exit(0);
+    } 
+    else{
+        return;
+    }
 }
 
 //두 개의 파일 크기를 비교하는 함수 작성
